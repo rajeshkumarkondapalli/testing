@@ -33,6 +33,7 @@ export interface GeneratedVideo {
   operationName: string | null;
   createdAt: number;
   aspectRatio: string;
+  enhanced?: boolean;
   error?: string;
 }
 

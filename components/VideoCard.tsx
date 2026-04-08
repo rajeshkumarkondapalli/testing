@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { Play, Pause, Volume2, VolumeX, Maximize, Clock, Loader2, AlertCircle, Download } from 'lucide-react';
+import { Play, Pause, Volume2, VolumeX, Maximize, Clock, Loader2, AlertCircle, Download, Zap } from 'lucide-react';
 import type { GeneratedVideo } from '@/lib/veo';
 
 interface VideoCardProps {
@@ -233,9 +233,17 @@ export default function VideoCard({ video }: VideoCardProps) {
           </div>
         </div>
 
-        {/* Aspect ratio badge */}
-        <div className="absolute top-2 right-2 bg-black/70 text-white text-xs px-1.5 py-0.5 rounded">
-          {video.aspectRatio}
+        {/* Badges */}
+        <div className="absolute top-2 right-2 flex items-center gap-1">
+          {video.enhanced && (
+            <div className="flex items-center gap-0.5 bg-purple-700/80 text-purple-200 text-xs px-1.5 py-0.5 rounded backdrop-blur-sm">
+              <Zap className="w-3 h-3" />
+              Enhanced
+            </div>
+          )}
+          <div className="bg-black/70 text-white text-xs px-1.5 py-0.5 rounded">
+            {video.aspectRatio}
+          </div>
         </div>
       </div>
 
@@ -244,7 +252,9 @@ export default function VideoCard({ video }: VideoCardProps) {
         <p className="text-yt-text text-sm font-medium line-clamp-2 leading-snug">{video.prompt}</p>
         <div className="flex items-center gap-1 mt-1.5">
           <div className="w-5 h-5 rounded-full bg-gradient-to-br from-yt-red to-purple-600 flex-shrink-0" />
-          <span className="text-yt-text-secondary text-xs truncate">AI Generated</span>
+          <span className="text-yt-text-secondary text-xs truncate">
+            {video.provider === 'replicate' ? 'Replicate' : video.provider === 'huggingface' ? 'HuggingFace' : 'Veo 2'}
+          </span>
           <span className="text-yt-text-secondary text-xs">•</span>
           <span className="text-yt-text-secondary text-xs whitespace-nowrap">{timeAgo(video.createdAt)}</span>
         </div>

@@ -34,6 +34,7 @@ export interface GeneratedVideo {
   createdAt: number;
   aspectRatio: string;
   enhanced?: boolean;
+  provider?: string;
   error?: string;
 }
 

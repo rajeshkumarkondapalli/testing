@@ -252,7 +252,9 @@ export default function VideoCard({ video }: VideoCardProps) {
         <p className="text-yt-text text-sm font-medium line-clamp-2 leading-snug">{video.prompt}</p>
         <div className="flex items-center gap-1 mt-1.5">
           <div className="w-5 h-5 rounded-full bg-gradient-to-br from-yt-red to-purple-600 flex-shrink-0" />
-          <span className="text-yt-text-secondary text-xs truncate">AI Generated</span>
+          <span className="text-yt-text-secondary text-xs truncate">
+            {video.provider === 'replicate' ? 'Replicate' : video.provider === 'huggingface' ? 'HuggingFace' : 'Veo 2'}
+          </span>
           <span className="text-yt-text-secondary text-xs">•</span>
           <span className="text-yt-text-secondary text-xs whitespace-nowrap">{timeAgo(video.createdAt)}</span>
         </div>
